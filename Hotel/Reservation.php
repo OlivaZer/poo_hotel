@@ -1,35 +1,33 @@
 <?php 
-
 class Reservation{
-    private string $dateDebut;
-    private string $dateFin;
+    private DateTime $dateDebut;
+    private DateTime $dateFin;
     private Chambre $chambre;
     private Client $client;
     private Hotel $hotel;
 
     public function __construct(string $dateDebut, string $dateFin, Chambre $chambre, Client $client)
     {
-        $this->dateDebut = $dateDebut;
-        $this->dateFin = $dateFin;
+        $this->dateDebut = new DateTime($dateDebut);
+        $this->dateFin = new DateTime($dateFin);
         $this->chambre = $chambre;
         $this->client = $client;
         $this->hotel = $chambre->getHotel();
-
     }
 
-    public function getDateDebut(): string {
+    public function getDateDebut(): DateTime {
         return $this->dateDebut;
     }
 
-    public function setDateDebut(string $dateDebut): void {
+    public function setDateDebut(DateTime $dateDebut): void {
         $this->dateDebut = $dateDebut;
     }
 
-    public function getDateFin(): string {
+    public function getDateFin(): DateTime {
         return $this->dateFin;
     }
 
-    public function setDateFin(string $dateFin): void {
+    public function setDateFin(DateTime $dateFin): void {
         $this->dateFin = $dateFin;
     }
 
@@ -49,20 +47,17 @@ class Reservation{
         $this->client = $client;
     }
 
-    public function getHotel(): Hotel
-    {
+    public function getHotel(): Hotel {
         return $this->hotel;
     }
-    public function setHotel(Hotel $hotel) : Reservation
-    {
-        $this->hotel = $hotel;
 
+    public function setHotel(Hotel $hotel): Reservation {
+        $this->hotel = $hotel;
         return $this;
     }
 
-    public function clientReservations(){
-        return 
-        $this->client->getPrenom()." ".$this->client->getNom()." - Chambre ".$this->chambre->getNumChambre()." - du ".$this->getDateDebut()." au ".$this->getDateFin();
+    public function clientReservations() {
+        return $this->client->getPrenom()." ".$this->client->getNom()." - Chambre ".$this->chambre->getNumChambre()." - du ".$this->getDateDebut()->format('Y-m-d')." au ".$this->getDateFin()->format('Y-m-d');
     }
 }
 

@@ -51,8 +51,8 @@ class Client{
         foreach ($this->reservations as $reservation) {
             echo  $this->getNom() . " " . $this->getPrenom() . " :\n";
             echo "Chambre : " . $reservation->getChambre()->getNumChambre() ."\n\n";
-            echo "Date de début : " . $reservation->getDateDebut() . "\n";
-            echo "Date de fin : " . $reservation->getDateFin() . "\n<br>";
+            echo "Date de début : " . $reservation->getDateDebut()->format('Y-m-d') . "\n";
+            echo "Date de fin : " . $reservation->getDateFin()->format('Y-m-d') . "\n<br>";
         }
     }
 
